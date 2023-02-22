@@ -8,13 +8,8 @@ export default function AboutPage() {
       title="About Karen"
       description="More information about Karen."
     >
-      <h1>About Karen</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-        deserunt mollit anim id est laborum.</p>
+      <h1>About This Blog</h1>
+      <p>This blog is made of a Gatsby front-end with no back-end.</p>
       <Link to='/'>Back to Home</Link>
     </Layout>
   );

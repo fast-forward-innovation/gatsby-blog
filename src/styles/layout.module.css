@@ -1,4 +1,5 @@
-.header {
+.header, 
+.footer {
   background: var(--black);
   color: var(--white);
   display: flex;
@@ -22,4 +23,13 @@
 .content {
   margin: 3rem auto;
   max-width: 54ch;
+  min-height: 78vh;
+  flex-direction: column;
+}
+
+.footer {
+  margin-top: auto;
+  position: sticky;
+  font-size: 0.8rem;
+  justify-content: center;
 }

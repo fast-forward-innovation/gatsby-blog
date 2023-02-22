@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import { Seo } from './seo.js';
 
-import { header, content } from '../styles/layout.module.css';
+import { header, footer, content } from '../styles/layout.module.css';
 import '../styles/global.css';
 
 export default function useLayoutEffect({
@@ -34,6 +34,9 @@ export default function useLayoutEffect({
         </nav>
       </header>
       <main className={content}>{children}</main>
+      <footer className={footer}>
+        © Fast Forward 2023
+      </footer>
     </>
   );
 }
