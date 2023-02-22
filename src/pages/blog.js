@@ -9,8 +9,8 @@ export default function Blog() {
       title="Blog"
       description="Blog with all entries"
     >
-      <p>You've reached the Blog</p>
-      <Link to='/'>Back to Home</Link>
+      <h1>You've reached the Blog</h1>
+      <p>Hello World</p>
     </Layout>
   )
 }
