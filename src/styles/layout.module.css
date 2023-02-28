@@ -1,7 +1,7 @@
 .header, 
 .footer {
-  background: var(--black);
-  color: var(--white);
+  background: #E1E1E1;
+  color: var(--gray);
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -14,6 +14,14 @@
   text-decoration: none;
 }
 
+header, top-header {
+  background: var(--gray);
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 1.5rem;
+}
+
 .header a:focus,
 .header a:hover {
   background: var(--white);
@@ -23,7 +31,8 @@
 .content {
   margin: 3rem auto;
   max-width: 54ch;
-  min-height: 78vh;
+  /* fix this to work for other screens */
+  min-height: 79.5vh;
   flex-direction: column;
 }
 
@@ -31,5 +40,5 @@
   margin-top: auto;
   position: sticky;
   font-size: 0.8rem;
-  justify-content: center;
+  padding: 1rem 3rem;
 }
