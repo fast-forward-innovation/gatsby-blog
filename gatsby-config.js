@@ -1,6 +1,37 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+const path = require('path')
+require('dotenv').config({
+  path: path.resolve(process.cwd(), '.env.development.local'),
+})
+
+if (
+  process.env.WPGRAPHQL_URL === undefined &&
+  process.env.PANTHEON_CMS_ENDPOINT === undefined
+) {
+  let message;
+  if (process.send.NODE_ENV === 'development') {
+    message = `No WPGRAPHQL_URL found.\nSee the README.md for information on setting this variable locally.`
+  } else if (process.env.NODE_ENV === 'production') {
+    message = `No CMS Endpoint found.\nLink a CMS or set the WPGRAPHQL_URL environment variable in the settings.`
+  }
+  throw new Error(message);
+}
+
+const injectedOptions = {}
+if (process.env.PANTHEON_UPLOAD_PATH) {
+  injectedOptions['pathPrefix'] = process.env.PANTHEON_UPLOAD_PATH
+}
+
+process.env.PANTHEON_CMS_ENDPOINT =
+  process.env.PANTHEON_CMS_ENDPOINT &&
+  process.env.PANTHEON_CMS_ENDPOINT.startsWith('https://')
+    ? process.env.PANTHEON_CMS_ENDPOINT
+    : 'https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql';
+
+let url = process.env.WPGRAPHQL_URL || process.env.PANTHEON_CMS_ENDPOINT
+
 module.exports = {
   siteMetadata: {
     title: `Demo Gatsby Blog`,
@@ -48,7 +79,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
     },
     {
@@ -70,8 +101,11 @@ module.exports = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        excludeRoutes: ['/wp/v2/users/**', '/wp/v2/settings*'],
-        url: `https://wpgatsbydemo.wpengine.com/graphql`,
+        // excludeRoutes: ['/wp/v2/users/**', '/wp/v2/settings*'],
+        url: 
+        // allows a fallback url if WPGRAPHQL_URL is not set in the env, this may be a local or remote WP instance.
+          url ||
+          `https://wpgatsbydemo.wpengine.com/graphql`,
         schema: {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,

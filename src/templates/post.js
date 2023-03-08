@@ -1,8 +1,8 @@
 import React from "react"
 import Layout from "../components/layout"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
-const BlogPost = ({ data }) => {
+const Post = ({ data }) => {
   const post = data.allWpPost.edges[0].node
   console.log(post)
   return (
@@ -17,7 +17,7 @@ const BlogPost = ({ data }) => {
   )
 }
 
-export const query = useStaticQuery(graphql`
+export const postQuery = graphql`
   query($slug: String!) {
     allWpPost(filter: { slug: { eq: $slug } }) {
       edges {
@@ -35,6 +35,6 @@ export const query = useStaticQuery(graphql`
       }
     }
   }
-`)
+`
 
-export default BlogPost;
+export default Post;

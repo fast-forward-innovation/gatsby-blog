@@ -8,24 +8,43 @@
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
 
-exports.createPages = async ({ actions }) => {
-  const { createPage } = actions
-  createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
-    context: {},
-    defer: true,
+// exports.createPages = async ({ actions }) => {
+//   const { createPage } = actions
+//   createPage({
+//     path: "/using-dsg",
+//     component: require.resolve("./src/templates/using-dsg.js"),
+//     context: {},
+//     defer: true,
+//   })
+// }
+
+const path = require(`path`)
+const webpack = require(`webpack`)
+const { slash } = require(`gatsby-core-utils`)
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+      plugins: [
+          new webpack.ProvidePlugin({
+              Buffer: [require.resolve("buffer/"), "Buffer"],
+          }),
+      ],
+      resolve: {
+          fallback: {
+              "http": false,
+              "url": false
+          },
+      },
   })
 }
 
-const path = require(`path`)
-const { slash } = require(`gatsby-core-utils`)
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
+
   // query content for WordPress posts
   const result = await graphql(`
     query {
-      allWordpressPost {
+      allWpPost {
         edges {
           node {
             id
@@ -35,8 +54,10 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
+
   const postTemplate = path.resolve(`./src/templates/post.js`)
-  result.data.allWordpressPost.edges.forEach(edge => {
+
+  result.data.allWpPost.edges.forEach(edge => {
     createPage({
       // will be the url for the page
       path: edge.node.slug,

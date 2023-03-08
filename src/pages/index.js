@@ -1,29 +1,20 @@
-// import * as React from "react";
-// import { StaticImage} from 'gatsby-plugin-image';
-// import Layout from '../components/layout.js';
-
-// import { imageWrapper } from '../styles/index.module.css';
-
-// export default function IndexPage() {
-  
-//   return (
-//     <Layout>
-//       <h1>Inspire with design. Empower through experience.</h1>
-//       <p>Explore around to see the basic features of this Gatsby Blog.</p>
-//     </Layout>
-//   )
-// }
-
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 // import SEO from "../components/seo"
+// import { GraphqlClientFactory } from '@pantheon-systems/wordpress-kit';
 
-export default ({ data }) => {
+const IndexPage = ({ data }) => {
+  // client is object with url, requestConfig, and rawRequest (to get post?)
+  // const client = new GraphqlClientFactory(
+  //   'my.wordpressbackend.com/wp/graphql',
+  // ).create();
+
   return (
     <Layout>
       {/* <SEO title="home" /> */}
       <h1>My WordPress Blog</h1>
+      <h2>Testing GraphqlClientFactory</h2>
       <h4>Posts</h4>
       {data.allWpPost.edges.map(({ node }) => (
         <div>
@@ -39,7 +30,7 @@ export default ({ data }) => {
 
 export const pageQuery = graphql`
   query {
-    allWpPost(sort: { fields: [date] }) {
+    allWpPost(sort: { date: DESC }) {
       edges {
         node {
           title
@@ -50,3 +41,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+export default IndexPage;
