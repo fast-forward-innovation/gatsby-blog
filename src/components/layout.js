@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TopHeader from './TopHeader.js';
 import BottomHeader from './BottomHeader.js';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { Link } from 'gatsby';
 import { Seo } from './seo.js';
 import { StaticImage } from 'gatsby-plugin-image';
 
@@ -15,17 +15,17 @@ export default function useLayoutEffect({
   image = false,
   path = false,
 }) {
-  const data = useStaticQuery(graphql`
-    query GetSiteTitle {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  // const data = useStaticQuery(graphql`
+  //   query GetSiteTitle {
+  //     site {
+  //       siteMetadata {
+  //         title
+  //       }
+  //     }
+  //   }
+  // `)
 
-  const meta = data?.site?.siteMetadata ?? {};
+  // const meta = data?.site?.siteMetadata ?? {}; //returns object with title
 
   return (
     <>
