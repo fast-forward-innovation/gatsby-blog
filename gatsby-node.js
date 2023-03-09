@@ -48,15 +48,7 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             id
-            title
-            content
             slug
-            date(formatString: "MM-DD-YYYY")
-            author {
-              node {
-                name
-              }
-            }
           }
         }
       }
@@ -64,7 +56,6 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
 
   const postTemplate = path.resolve(`./src/templates/blog-post.js`)
-  debugger
   result.data.allWpPost.edges.forEach(edge => {
     createPage({
       // will be the url for the page
