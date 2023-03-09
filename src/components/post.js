@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import { graphql } from "gatsby"
 
 const Post = ({ data }) => {
+  debugger
   const post = data.allWpPost.edges[0].node
   console.log(post)
   return (
@@ -17,7 +18,7 @@ const Post = ({ data }) => {
   )
 }
 
-export const postQuery = graphql`
+export const pageQuery = graphql`
   query($slug: String!) {
     allWpPost(filter: { slug: { eq: $slug } }) {
       edges {

@@ -14,11 +14,10 @@ const IndexPage = ({ data }) => {
     <Layout>
       {/* <SEO title="home" /> */}
       <h1>My WordPress Blog</h1>
-      <h2>Testing GraphqlClientFactory</h2>
       <h4>Posts</h4>
       {data.allWpPost.edges.map(({ node }) => (
         <div>
-          <Link to={node.slug}>
+          <Link to={`/blog/${node.slug}`}>
             <p>{node.title}</p>
           </Link>
           <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />

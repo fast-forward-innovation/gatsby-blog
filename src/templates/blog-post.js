@@ -1,8 +1,8 @@
 import React from "react"
 import Layout from "../components/layout"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 
-const BlogPost = ({ data }) => {
+export default function BlogPost ({ data }) {
   const post = data.allWpPost.edges[0].node
   console.log(post)
   return (
@@ -10,14 +10,17 @@ const BlogPost = ({ data }) => {
       <div>
         <h1>{post.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        <p> By: {post.author.name} </p>
+        {/* <p> By: {post.author.name} </p> */}
         <p> On: {post.date} </p>
+        <Link to ='/'>
+          <p>Back to Blog</p>
+        </Link>
       </div>
     </Layout>
   )
 }
 
-export const query = useStaticQuery(graphql`
+export const pageQuery = graphql`
   query($slug: String!) {
     allWpPost(filter: { slug: { eq: $slug } }) {
       edges {
@@ -35,6 +38,4 @@ export const query = useStaticQuery(graphql`
       }
     }
   }
-`)
-
-export default BlogPost;
+`
