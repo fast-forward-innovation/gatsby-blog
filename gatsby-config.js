@@ -126,10 +126,10 @@ module.exports = {
         },
         // Specify the URL of the WordPress source
         // Replace baseUrl w/ GraphQL endpoint if using locally hosted site
-        baseURL: 'live-gatsby-wordpress-demo.pantheonsite.io/wp/graphql',
-        protocol: 'https',
+        // baseURL: 'live-gatsby-wordpress-demo.pantheonsite.io/wp/graphql',
+        // protocol: 'https',
         // Indicates if a site is hosted on WordPress.com
-        hostingWPCOM: false,
+        // hostingWPCOM: false,
         // Specify which URL structures to fetch
         // includedRoutes: [
         //   '**/posts',

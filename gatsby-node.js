@@ -22,6 +22,7 @@ const path = require(`path`)
 const webpack = require(`webpack`)
 const { slash } = require(`gatsby-core-utils`)
 
+// webpack config
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
       plugins: [
@@ -40,7 +41,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-
   // query content for WordPress posts
   const result = await graphql(`
     query {
@@ -55,18 +55,17 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const postTemplate = path.resolve(`./src/templates/post.js`)
-
+  const postTemplate = path.resolve(`./src/templates/blog-post.js`)
   result.data.allWpPost.edges.forEach(edge => {
     createPage({
       // will be the url for the page
-      path: edge.node.slug,
+      path: '/blog/' + edge.node.slug,
       // specify the component template of your choice
       component: slash(postTemplate),
       // In the ^template's GraphQL query, 'id' will be available
       // as a GraphQL variable to query for this post's data.
       context: {
-        id: edge.node.id,
+        slug: edge.node.slug,
       },
     })
   })
