@@ -10,7 +10,6 @@ export default function BlogPost ({ data }) {
       <div>
         <h1>{post.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        {/* <p> By: {post.author.name} </p> */}
         <p> On: {post.date} </p>
         <Link to ='/'>
           <p>Back to Blog</p>
